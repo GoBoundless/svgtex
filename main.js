@@ -53,7 +53,8 @@ page.open('index.html', function (status) {
     var query;
     if (req.method == 'GET') {
       // URL starts with /? and is urlencoded.
-      query = unescape(req.url.substr(2));
+      // BUGBUG: For some crazy reason this is double encoded!??!?!
+      query = unescape(unescape(req.url.substr(2)));
     } else {
       query = req.postRaw;
     }
